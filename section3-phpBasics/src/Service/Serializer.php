@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Service;
 
 use App\Format\FormatInterface;
 
-class Serializer {
+class Serializer implements FormatInterface {
 
   private $format;
 
