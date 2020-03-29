@@ -5,22 +5,12 @@ namespace App\Format;
 class JSON extends BaseFormat{
 
 
-
-  public function convert()
-  {
-    return $this->toJSON();
-  }
-
-
   public function __toString()
   {
-    return $this->toJSON();
+    // return $this->convert();
+    return parent::convert();
   }
 
-  private function toJSON()
-  {
-    return json_encode($this->data);
-  }
 
 
 

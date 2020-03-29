@@ -38,3 +38,5 @@ echo "<br/>";
 
 print_r("Result of conversation");
 var_dump($json->convert());
+var_dump($xml->convert());
+var_dump($yml->convert());

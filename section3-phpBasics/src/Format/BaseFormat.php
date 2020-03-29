@@ -19,4 +19,13 @@ class BaseFormat {
   {
     $this->data = $data;
   }
+
+  public function convert()
+  {
+    return "I'm not converting anything";
+  }
+  public function __toString()
+  {
+    return $this->convert();
+  }
 }
