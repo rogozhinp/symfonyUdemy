@@ -2,9 +2,9 @@
 
 namespace App\Format;
 
-class YAML extends BaseFormat implements NamedFormatInterface
+class YAML extends BaseFormat implements NamedFormatInterface, FormatInterface
 {
-  public function convert()
+  public function convert(): string
   {
     $result = '';
 

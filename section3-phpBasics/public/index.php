@@ -9,8 +9,9 @@ use App\Format\YAML;
 use App\Format\BaseFormat;
 use App\FromStringInterface;
 use App\NamedFormatInterface;
+use App\Serializer;
 
-print_r("Anonymous functions");
+print_r("Dependency Injection");
 echo "<br/>";
 
 
@@ -19,22 +20,5 @@ $data = [
   "surname" => "Doe"
 ];
 
-$formats = [
-  new JSON($data),
-  new XML($data),
-  new YAML($data)
-];
-
-
-function findByName(string $name, array $formats): ?BaseFormat {
-  $found = array_filter($formats, function ($format) use ($name){
-    return $format->getName() === $name;
-  });
-
-  if(count($found)){
-    return reset($found);
-  }
-  return null;
-}
-
-var_dump(findByName('NoExisting', $formats));
+$serializer = new Serializer(new XML());
+var_dump($serializer->serialize($data));
