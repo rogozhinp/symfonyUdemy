@@ -10,24 +10,31 @@ use App\Format\BaseFormat;
 use App\FromStringInterface;
 use App\NamedFormatInterface;
 
-print_r("Typed arguments and return types");
+print_r("Anonymous functions");
 echo "<br/>";
-
-function convertData(BaseFormat $format)
-{
-  return $format->convert();
-}
-
-function getFormatName(NamedFormatInterface $format)
-{
-  return $format->getName();
-}
 
 
 $data = [
   "name" => "John",
   "surname" => "Doe"
 ];
-$json = new JSON();
-var_dump(convertData($json));
-var_dump(getFormatName($json));
+
+$formats = [
+  new JSON($data),
+  new XML($data),
+  new YAML($data)
+];
+
+
+function findByName(string $name, array $formats): ?BaseFormat {
+  $found = array_filter($formats, function ($format) use ($name){
+    return $format->getName() === $name;
+  });
+
+  if(count($found)){
+    return reset($found);
+  }
+  return null;
+}
+
+var_dump(findByName('NoExisting', $formats));
