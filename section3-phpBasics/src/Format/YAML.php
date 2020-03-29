@@ -2,7 +2,7 @@
 
 namespace App\Format;
 
-class YAML extends BaseFormat
+class YAML extends BaseFormat implements NamedFormatInterface
 {
   public function convert()
   {
@@ -14,5 +14,10 @@ class YAML extends BaseFormat
     }
 
     return htmlspecialchars($result);
+  }
+
+  public function getName()
+  {
+    return "YML";
   }
 }

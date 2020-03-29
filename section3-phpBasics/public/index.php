@@ -2,15 +2,15 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-// use App\Format;
-// use App\Format as F;
-// use App\Format\{JSON,XML,YAML}
+
 use App\Format\JSON;
 use App\Format\XML;
 use App\Format\YAML;
 use App\Format\BaseFormat;
+use App\FromStringInterface;
+use App\NamedFormatInterface;
 
-print_r("Abstract classes");
+print_r("Interfaces");
 echo "<br/>";
 
 
@@ -24,18 +24,31 @@ $xml = new XML($data);
 $yml = new YAML($data);
 // $base = new BaseFormat($data);
 
-echo "<br/>";
-var_dump($json);
-echo "<br/>";
-var_dump($xml);
-echo "<br/>";
-var_dump($yml);
-echo "<br/>";
-// var_dump($base);
+// echo "<br/>";
+// var_dump($json);
+// echo "<br/>";
+// var_dump($xml);
+// echo "<br/>";
+// var_dump($yml);
+// echo "<br/>";
+// // var_dump($base);
 // echo "<br/>";
 
-print_r("Result of conversation");
-var_dump($json->convert());
-var_dump($xml->convert());
-var_dump($yml->convert());
-// var_dump($base->convert());
+print_r("Result of conversion");
+
+$formats = [$json, $xml, $yml];
+
+foreach ($formats as $format) {
+  if($format instanceof NamedFormatInterface)
+  {
+    var_dump($format->getName());
+  }
+  var_dump($format->convert());
+  var_dump($format instanceof FromStringInterface);
+
+  if($format instanceof FromStringInterface)
+  {
+    echo "<br/>";
+    var_dump($json->convertFromString('{"name": "John", "surname": "Doe"}'));
+  }
+}
