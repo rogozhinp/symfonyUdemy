@@ -12,6 +12,7 @@ use App\NamedFormatInterface;
 use App\Service\Serializer;
 use App\Controller\IndexController;
 use App\Container;
+use App\Fromat\FormatInterface;
 
 print_r("Simple Service Container");
 echo "<br/>";
