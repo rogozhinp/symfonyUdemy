@@ -2,38 +2,15 @@
 
 namespace App\Format;
 
-class JSON {
+class JSON extends BaseFormat{
 
-  const DATA = [
-    "success" => true
-  ];
 
-  private $data;
-
-  public function getData()
-  {
-    return $this->data;
-  }
-
-  public function setData($data)
-  {
-    $this->data = $data;
-  }
-
-  public function __construct($data)
-  {
-    $this->data = $data;
-  }
 
   public function convert()
   {
     return $this->toJSON();
   }
 
-  public static function convertData()
-  {
-    return json_encode(self::DATA);
-  }
 
   public function __toString()
   {
@@ -42,12 +19,7 @@ class JSON {
 
   private function toJSON()
   {
-    return json_encode(
-      array_merge(
-        self::DATA,
-        $this->data
-      )
-    );
+    return json_encode($this->data);
   }
 
 
