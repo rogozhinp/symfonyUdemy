@@ -30,11 +30,17 @@ class BlogController extends AbstractController{
   ];
 
   /**
-  *@Route("/", name="blog_list")
+  *@Route("/{page}", name="blog_list", defaults={"page": 1})
   */
-  public function list()
+  public function list($page)
   {
-    return new JsonResponse(self::POSTS);
+    return new JsonResponse(
+      [
+        'page' => $page,
+        'data' => array_map(function ($item){
+          return $this->generateUrl('blog_by_slug', ['slug' => $item['slug']]);
+        }, self::POSTS)]
+    );
   }
   /**
   *@Route("/{id}", name="blog_by_id", requirements={"id"="\d+"})
