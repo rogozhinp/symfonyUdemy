@@ -2881,16 +2881,11 @@
             },
             "autoload": {
                 "psr-4": {
-<<<<<<< HEAD
-                    "Symfony\\Bundle\\MakerBundle\\": "src/"
-                }
-=======
                     "Symfony\\Component\\Inflector\\": ""
                 },
                 "exclude-from-classmap": [
                     "/Tests/"
                 ]
->>>>>>> newSymfony
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3273,11 +3268,7 @@
             },
             "autoload": {
                 "psr-4": {
-<<<<<<< HEAD
-                    "Symfony\\Component\\Routing\\": ""
-=======
                     "Symfony\\Component\\PropertyAccess\\": ""
->>>>>>> newSymfony
                 },
                 "exclude-from-classmap": [
                     "/Tests/"

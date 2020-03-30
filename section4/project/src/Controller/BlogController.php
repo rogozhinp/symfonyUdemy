@@ -56,22 +56,22 @@ class BlogController extends AbstractController
         );
     }
 
+    // /**
+    //  * @Route("/{slug}", name="blog_by_slug")
+    //  * @param $slug
+    //  * @return JsonResponse
+    //  */
+    // public function postBySlug($slug)
+    // {
+    //     return new JsonResponse(
+    //         self::POSTS[array_search($slug, array_column(self::POSTS, 'slug'))]
+    //     );
+    //
+    //
+    // }
+
     /**
-     * @Route("/{slug}", name="blog_by_slug")
-     * @param $slug
-     * @return JsonResponse
-     */
-    public function postBySlug($slug)
-    {
-        return new JsonResponse(
-            self::POSTS[array_search($slug, array_column(self::POSTS, 'slug'))]
-        );
-
-
-    }
-
-    /**
-     * @Route("/add", name="blog_add", methods={"POST"})
+     * @Route("/add", name="blog_add", method={"POST"})
      */
     public function add(Request $request)
     {
