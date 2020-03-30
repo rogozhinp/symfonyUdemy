@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Serializer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/blog")
@@ -36,22 +37,20 @@ class BlogController extends AbstractController
 
     /**
      * @Route("/post/{id}", name="blog_by_id", requirements={"id"="\d+"})
+     * @ParamConverter("post", class="App:BlogPost")
      */
-    public function post($id)
+    public function post($post)
     {
-        return $this->json(
-            $this->getDoctrine()->getRepository(BlogPost::class)->find($id)
-        );
+        return $this->json($post);
     }
 
     /**
      * @Route("/post/{slug}", name="blog_by_slug", methods={"GET"})
+     * @ParamConverter("post", class="App:BlogPost", options={"mapping": {"slug": "slug"}})
      */
-    public function postBySlug($slug)
+    public function postBySlug($post)
     {
-        return $this->json(
-            $this->getDoctrine()->getRepository(BlogPost::class)->findBy(['slug' => $slug])
-        );
+        return $this->json($post);
 
 
     }
