@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Serializer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/blog")
@@ -36,7 +37,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/post/{id}", name="blog_by_id", requirements={"id"="\d+"})
+     * @Route("/post/{id}", name="blog_by_id", requirements={"id"="\d+"}, methods={"GET"})
      * @ParamConverter("post", class="App:BlogPost")
      */
     public function post($post)
@@ -68,5 +69,16 @@ class BlogController extends AbstractController
         $em->flush();
 
         return $this->json($blogPost);
+    }
+    /**
+     * @Route("/post/{id}", name="blog_delete", methods={"DELETE"})
+     */
+    public function delete(BlogPost $post)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $em->remove($post);
+      $em->flush();
+
+      return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 }
